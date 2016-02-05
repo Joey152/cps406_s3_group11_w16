@@ -14,4 +14,4 @@ Tester: Edgar Safaryn
 
 Project: Innovative Automated Teller Machine
 
-Preffered programing language: Java
+Preferred programing language: Java
