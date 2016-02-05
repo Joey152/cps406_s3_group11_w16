@@ -10,7 +10,7 @@ Developer #1: Jermaine Ganado
 
 Developer #2: Christopher Papanagiotou
 
-Tester: Edgar Safaryn
+Tester: Edgar Safaryan
 
 Project: Innovative Automated Teller Machine
 
