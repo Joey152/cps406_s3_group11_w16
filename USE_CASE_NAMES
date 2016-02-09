@@ -1,10 +1,13 @@
 1. Perform transaction
+-----include
+      2.Pin and card validation
 -----extensions
       1.1 withdraw cash
       1.2 Check account activity
       1.3 Change pin
       1.4 Transfer funds
       1.5 Deposit funds
+      1.6 Inquiry
       
 
 
