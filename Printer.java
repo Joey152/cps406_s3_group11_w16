@@ -13,10 +13,18 @@ public class Printer {
 	
 	public void printReceipt() throws IOException {
 		
-		int account = transactions.account();
+		int account = transactions.getAccount();
 		int[] type = transactions.getTransactionType();
+		int[] dates = transactions.getTransactionDate();
+		int[] balance = transactions.getTransactionBalance();
+		int[] amount = transactions.getTransactionBalance();
 		
-		PrintWriter pw = new PrintWriter(new FileWriter(""));
+		String fileName = "Receipt - " + account + ".txt";
+		PrintWriter pw = new PrintWriter(new FileWriter(filename));
+		
+		pw.write("wow");
+		
+		pw.close();
 	}
 	
 	public void printTransactionHistory() {
