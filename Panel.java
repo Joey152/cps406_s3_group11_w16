@@ -76,7 +76,7 @@ public class Panel extends JFrame implements ActionListener{
 		insertCardLabel  = new JLabel("Please Insert Card");
 		insertCardLabel.setFont(new Font("Calibri" , Font.BOLD , 30));
 		gbc.weighty = 10;
-	    gbc.anchor = GridBagConstraints.PAGE_END; 
+	    	gbc.anchor = GridBagConstraints.PAGE_END; 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		welcomePanel.add(insertCardLabel , gbc);
@@ -85,7 +85,7 @@ public class Panel extends JFrame implements ActionListener{
 		cardButton.addActionListener(this);
 		
 		gbc.weighty = 20;
-	    gbc.anchor = GridBagConstraints.PAGE_START; 
+	    	gbc.anchor = GridBagConstraints.PAGE_START; 
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		welcomePanel.add(cardButton , gbc);
