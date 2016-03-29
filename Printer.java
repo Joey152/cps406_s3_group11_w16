@@ -53,7 +53,10 @@ public class Printer {
 		pw.close();
 	}
 	
-	public void printTransactionHistory() {
-		
+	public String printTransactionHistory() {
+		Scanner sc = new Scanner(account + ".txt");
+		String history;
+		history += sc.nextLine();
+		return history;
 	}
 }
