@@ -1,4 +1,4 @@
-package cps406;
+
 
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
