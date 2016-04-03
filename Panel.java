@@ -276,6 +276,15 @@ public class Panel extends JFrame implements ActionListener{
 		else if(event.getSource() == chgPinButton){
 			mainLayout.show(mainPanel , "4");
 		}
+		else if(event.getSource() == withdrawButton){
+			//stuff
+		}
+		else if(event.getSource() == depositButton){
+			//stuff
+		}
+		else if(event.getSource() == infoButton){
+			//stuff
+		}
 		
 		if(OK.equals(command)){
 //--------------------This part does not belong here.-----------------------------//	
