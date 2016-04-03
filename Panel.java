@@ -206,6 +206,8 @@ public class Panel extends JFrame implements ActionListener{
 		
 		emergencyButton.addActionListener(this);
 		gbc.anchor = GridBagConstraints.SOUTH;
+		gbc.gridx = 0;
+		gbc.gridy = 6;
 		transactionPanel.add(emergencyButton, gbc);
 	}
 	public void infoPanel(){
