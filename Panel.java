@@ -27,21 +27,30 @@ public class Panel extends JFrame implements ActionListener{
 	public JPanel welcomePanel;
 	public JPanel passwordPanel;
 	public JPanel transactionPanel;
+	public JPanel chgPinPanel;
 	public GridBagConstraints gbc;
 	public JLabel welcomeLabel;
 	public JLabel insertCardLabel;
 	public JLabel passwordLabel;
 	public JLabel transactionLabel;
+	public JLabel oldPinLabel;
+	public JLabel newPinLabel;
+	public JLabel newPinLabel2;
 	public JButton cardButton;
 	public JButton depositButton;
 	public JButton withdrawButton;
 	public JButton infoButton;
 	public JButton chgPinButton;
 	public JButton exitButton;
-	public CardLayout cLayout;
-	public JPasswordField passwordField;
 	private Card card = new Card(0,0,0,0);
 	private CardManager cMan = new CardManager(card);
+	public JButton submitButton;
+	public JButton cancelButton;
+	public CardLayout mainLayout;
+	public JPasswordField pinField;
+	public JPasswordField newPinField;
+	public JPasswordField newPinField2;
+	public JPasswordField oldPinField;
 	
 	public static final String OK = "OK";
 	
@@ -52,30 +61,41 @@ public class Panel extends JFrame implements ActionListener{
 		welcomePanel = new JPanel();
 		passwordPanel = new JPanel();
 		transactionPanel = new JPanel();
-		cLayout = new CardLayout();
+		chgPinPanel = new JPanel();
+		mainLayout = new CardLayout();
 		gbc = new GridBagConstraints();
 		welcomeLabel = new JLabel("Welcome!");
 		insertCardLabel  = new JLabel("Please Insert Card");
 		cardButton = new JButton("Browse Card");
 		passwordLabel = new JLabel("Enter Pin:");	
-		passwordField = new JPasswordField(4);
+		oldPinLabel = new JLabel("Enter old pin:");
+		newPinLabel = new JLabel("Enter new pin:");
+		newPinLabel2 = new JLabel("Verify new pin:");
+		pinField = new JPasswordField(4);
+		newPinField = new JPasswordField(4);
+		newPinField2 = new JPasswordField(4);
+		oldPinField = new JPasswordField(4);
 		transactionLabel = new JLabel("Please select a transaction.");
 		withdrawButton = new JButton("Withdraw");
 		depositButton = new JButton("Deposit");
 		chgPinButton = new JButton("Change Pin");
 		infoButton = new JButton("View Account Information");
 		exitButton = new JButton("Exit");
+		submitButton = new JButton("Submit");
+		cancelButton = new JButton("Cancel");
 	}
 	public void gui()
 	{
-		mainPanel.setLayout(cLayout);
+		mainPanel.setLayout(mainLayout);
 		mainPanel.add(welcomePanel , "1");
 		mainPanel.add(passwordPanel, "2");
 		mainPanel.add(transactionPanel, "3");
+		mainPanel.add( chgPinPanel  , "4");
 		
 		this.welcomeMenu();
 		this.passwordMenu();
 		this.transactionMenu();
+		this.chgPinMenu();
 		
 		add(mainPanel);
 		setSize(FRAME_WIDTH , FRAME_HEIGHT);
@@ -118,15 +138,15 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridy = 0;
 		passwordPanel.add(passwordLabel, gbc);
 		
-		passwordField.setActionCommand(OK);
-		passwordField.addActionListener(this);
-		passwordField.setEchoChar('*');
-		passwordField.setFont(new Font("calibri" , Font.BOLD , 30));
+		pinField.setActionCommand(OK);
+		pinField.addActionListener(this);
+		pinField.setEchoChar('*');
+		pinField.setFont(new Font("calibri" , Font.BOLD , 30));
 		gbc.anchor = GridBagConstraints.PAGE_START;
 		gbc.weighty = 50;
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		passwordPanel.add(passwordField , gbc);
+		passwordPanel.add(pinField , gbc);
 		
 		gbc.weighty = 0;
 	}	
@@ -155,6 +175,7 @@ public class Panel extends JFrame implements ActionListener{
 		
 		gbc.gridx = 0;
 		gbc.gridy = 3;
+		chgPinButton.addActionListener(this);
 		transactionPanel.add(chgPinButton, gbc);
 		
 		gbc.gridx = 0 ;
@@ -171,12 +192,69 @@ public class Panel extends JFrame implements ActionListener{
 		transactionPanel.add(exitButton, gbc);
 		
 	}
+	public void chgPinMenu()
+	{
+		chgPinPanel.setLayout(new GridBagLayout());
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		
+		oldPinLabel.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		chgPinPanel.add(oldPinLabel , gbc);
+		
+		oldPinField.setEchoChar('*');
+		oldPinField.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		chgPinPanel.add( oldPinField ,  gbc);
+		
+		newPinLabel.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		chgPinPanel.add( newPinLabel , gbc);
+		
+		newPinField.setEchoChar('*');
+		newPinField.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		chgPinPanel.add( newPinField , gbc);
+		
+		newPinLabel2.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		chgPinPanel.add(newPinLabel2 , gbc);
+		
+		newPinField2.setEchoChar('*');
+		newPinField2.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		chgPinPanel.add(newPinField2 , gbc);
+		
+		gbc.fill = GridBagConstraints.NONE;
+		
+		cancelButton.addActionListener(this);
+		gbc.insets = new Insets(100 , 0 , 0 , 0);
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		chgPinPanel.add(cancelButton , gbc);
+		
+		submitButton.addActionListener(this);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		chgPinPanel.add(submitButton , gbc);
+	}
+	
 	public void actionPerformed(ActionEvent event)
 	{
-		String command = event.getActionCommand();
-		if(event.getSource() == cardButton){	    
-			Scanner in = null;
+		String command = event.getActionCommand();		
+		if(event.getSource() == cardButton){
+			
+		    Scanner in = null;
 			JFileChooser chooser = new JFileChooser();
+			
 			if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
 				File selectedFile = chooser.getSelectedFile();
 				try {
@@ -187,23 +265,27 @@ public class Panel extends JFrame implements ActionListener{
 				if(in.hasNextLine()){
 					cardPin = in.nextLine();
 					card.setPin(Integer.parseInt(cardPin), selectedFile);
-				} //yes it writes it to itself, I'm being lazy
-				cLayout.show(mainPanel , "2");		
+				} //yes it writes it to itself, I'm being lazy				
+				mainLayout.show(mainPanel , "2");
 			}			
 		}
 		else if(event.getSource() == exitButton){
 			setVisible(false); 
 			dispose();
 		}
+		else if(event.getSource() == chgPinButton){
+			mainLayout.show(mainPanel , "4");
+		}
+		
 		if(OK.equals(command)){
 //--------------------This part does not belong here.-----------------------------//	
-			String userPin = new String(passwordField.getPassword());
+			String userPin = new String(pinField.getPassword());
 			if(userPin.equals(cardPin)){
 				System.out.println("Password Correct!");
-				cLayout.show(mainPanel, "3");
+				mainLayout.show(mainPanel, "3");
 			}else{
 				System.out.println("Password Incorrect!");
-				passwordField.selectAll();
+				pinField.selectAll();
 			}
 //------------------------------------------------------------------------------------------//			
 		}

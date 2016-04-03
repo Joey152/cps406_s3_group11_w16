@@ -11,8 +11,7 @@ public class BankAccount {
 	private Card c;
 	private CardManager cm;
 	private int balance;
-	
-	
+		
 	public BankAccount(int cardNum, int pin, int month, int year, String name)
 	{
 		c = new Card(cardNum, pin, month, year);
