@@ -281,6 +281,10 @@ public class Panel extends JFrame implements ActionListener{
 			newPin = Integer.parseInt(new String(newPinField.getPassword()));
 			newPin2 = Integer.parseInt(new String(newPinField2.getPassword()));
 			
+			oldPinField.selectAll();
+			newPinField.selectAll();
+			newPinField.selectAll();
+			
 			mainLayout.show(mainPanel , "3");
 		}
 		else if(event.getSource() == chgPinButton){
