@@ -29,6 +29,7 @@ public class Panel extends JFrame implements ActionListener{
 	public JPanel transactionPanel;
 	public JPanel chgPinPanel;
 	public JPanel infoPanel;
+	public JPanel withdrawPanel;
 	public GridBagConstraints gbc;
 	public JLabel welcomeLabel;
 	public JLabel insertCardLabel;
@@ -37,6 +38,7 @@ public class Panel extends JFrame implements ActionListener{
 	public JLabel oldPinLabel;
 	public JLabel newPinLabel;
 	public JLabel newPinLabel2;
+	public JLabel withdrawLabel;
 	public JButton cardButton;
 	public JButton depositButton;
 	public JButton withdrawButton;
@@ -67,6 +69,7 @@ public class Panel extends JFrame implements ActionListener{
 		transactionPanel = new JPanel();
 		chgPinPanel = new JPanel();
 		infoPanel = new JPanel();
+		withdrawPanel = new JPanel();
 		mainLayout = new CardLayout();
 		gbc = new GridBagConstraints();
 		welcomeLabel = new JLabel("Welcome!");
@@ -96,14 +99,16 @@ public class Panel extends JFrame implements ActionListener{
 		mainPanel.add(welcomePanel , "1");
 		mainPanel.add(passwordPanel, "2");
 		mainPanel.add(transactionPanel, "3");
-		mainPanel.add( chgPinPanel  , "4");
+		mainPanel.add(chgPinPanel  , "4");
 		mainPanel.add(infoPanel, "5");
+		mainPanel.add(withdrawPanel , "6");
 		
 		this.welcomeMenu();
 		this.passwordMenu();
 		this.transactionMenu();
 		this.chgPinMenu();
-		this.infoPanel();
+		//this.infoPanel();
+		this.withdrawMenu();
 		
 		add(mainPanel);
 		setSize(FRAME_WIDTH , FRAME_HEIGHT);
@@ -201,9 +206,9 @@ public class Panel extends JFrame implements ActionListener{
 		transactionPanel.add(exitButton, gbc);
 		
 	}
-	public void infoPanel(){
+	//public void infoPanel(){
 		
-	}
+	//}
 	
 	public void chgPinMenu()
 	{
@@ -259,7 +264,15 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridy = 3;
 		chgPinPanel.add(submitButton , gbc);				
 	}
-	
+	public void withdrawMenu()
+	{
+		withdrawPanel.setLayout(new GridBagLayout());
+		
+		withdrawLabel.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		withdrawPanel.add(withdrawLabel , gbc);
+	}
 	public void actionPerformed(ActionEvent event)
 	{
 		String command = event.getActionCommand();		
@@ -307,7 +320,7 @@ public class Panel extends JFrame implements ActionListener{
 			mainLayout.show(mainPanel , "4");
 		}
 		else if(event.getSource() == withdrawButton){
-			//stuff
+			mainLayout.show(mainPanel , "6");
 		}
 		else if(event.getSource() == depositButton){
 			//stuff
