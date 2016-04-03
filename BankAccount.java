@@ -9,16 +9,16 @@ public class BankAccount {
 	private int minWithdraw;
 	private boolean cardStatus;
 	private Card c;
-	private CardManager cm;
 	private int balance;
+	private int cardNumber;
 		
-	public BankAccount(int cardNum, int pin, int month, int year, String name)
+	public BankAccount(Card crd, String name)
 	{
-		c = new Card(cardNum, pin, month, year);
-		cm = new CardManager(c);
+		c = crd;
 		this.name = name;
 		minWithdraw = 20;
 		maxWithdraw = 100;
+		this.balance = 1000;
 	}
 	
 	public String getName()
@@ -54,5 +54,13 @@ public class BankAccount {
 	public int getMaxWithdraw()
 	{
 		return this.maxWithdraw;
+	}
+	public void setPin(int pinNum)
+	{
+		this.pin = pinNum;
+	}
+	public void setCardNumber(int cardNum)
+	{
+		this.cardNumber = cardNum; 
 	}
 }
