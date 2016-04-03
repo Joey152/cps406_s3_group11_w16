@@ -28,6 +28,7 @@ public class Panel extends JFrame implements ActionListener{
 	public JPanel passwordPanel;
 	public JPanel transactionPanel;
 	public JPanel chgPinPanel;
+	public JPanel infoPanel;
 	public GridBagConstraints gbc;
 	public JLabel welcomeLabel;
 	public JLabel insertCardLabel;
@@ -65,6 +66,7 @@ public class Panel extends JFrame implements ActionListener{
 		passwordPanel = new JPanel();
 		transactionPanel = new JPanel();
 		chgPinPanel = new JPanel();
+		infoPanel = new JPanel();
 		mainLayout = new CardLayout();
 		gbc = new GridBagConstraints();
 		welcomeLabel = new JLabel("Welcome!");
@@ -95,11 +97,13 @@ public class Panel extends JFrame implements ActionListener{
 		mainPanel.add(passwordPanel, "2");
 		mainPanel.add(transactionPanel, "3");
 		mainPanel.add( chgPinPanel  , "4");
+		mainPanel.add(infoPanel, "5");
 		
 		this.welcomeMenu();
 		this.passwordMenu();
 		this.transactionMenu();
 		this.chgPinMenu();
+		this.infoPanel();
 		
 		add(mainPanel);
 		setSize(FRAME_WIDTH , FRAME_HEIGHT);
@@ -197,6 +201,10 @@ public class Panel extends JFrame implements ActionListener{
 		transactionPanel.add(exitButton, gbc);
 		
 	}
+	public void infoPanel(){
+		
+	}
+	
 	public void chgPinMenu()
 	{
 		chgPinPanel.setLayout(new GridBagLayout());
