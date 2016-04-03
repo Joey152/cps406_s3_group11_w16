@@ -1,5 +1,7 @@
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -30,6 +32,7 @@ public class Panel extends JFrame implements ActionListener{
 	public JPanel chgPinPanel;
 	public JPanel infoPanel;
 	public JPanel withdrawPanel;
+	public JPanel depositPanel;
 	public GridBagConstraints gbc;
 	public JLabel welcomeLabel;
 	public JLabel insertCardLabel;
@@ -39,26 +42,35 @@ public class Panel extends JFrame implements ActionListener{
 	public JLabel newPinLabel;
 	public JLabel newPinLabel2;
 	public JLabel withdrawLabel;
+	public JLabel depositLabel;
 	public JButton cardButton;
 	public JButton depositButton;
 	public JButton withdrawButton;
 	public JButton infoButton;
 	public JButton chgPinButton;
 	public JButton exitButton;
-	private Card card = new Card(0,0,0,0);
+	public JButton submitWithdrawBtn;
+	public JButton submitDepositBtn;
+	public JButton submitChgPinBtn;
+	private Card card = new Card(0,0,0,0); //sadly needed to do this, lazy programming, I know
+	private JButton emergencyButton;
 	private CardManager cMan = new CardManager(card);
-	public JButton submitButton;
 	public JButton cancelButton;
 	public CardLayout mainLayout;
 	public JPasswordField pinField;
 	public JPasswordField newPinField;
 	public JPasswordField newPinField2;
 	public JPasswordField oldPinField;
+	public JTextField withdrawField;
+	public JTextField depositField;
 	public int oldPin;
 	public int newPin;
 	public int newPin2;	
 	public static final String OK = "OK";
 	private File selectedFile;
+	private int transAmount;
+	private BankAccount bAccount;
+
 	
 	public Panel() 
 	{
@@ -70,6 +82,7 @@ public class Panel extends JFrame implements ActionListener{
 		chgPinPanel = new JPanel();
 		infoPanel = new JPanel();
 		withdrawPanel = new JPanel();
+		depositPanel = new JPanel();
 		mainLayout = new CardLayout();
 		gbc = new GridBagConstraints();
 		welcomeLabel = new JLabel("Welcome!");
@@ -79,18 +92,25 @@ public class Panel extends JFrame implements ActionListener{
 		oldPinLabel = new JLabel("Enter old pin:");
 		newPinLabel = new JLabel("Enter new pin:");
 		newPinLabel2 = new JLabel("Verify new pin:");
+		withdrawLabel = new JLabel("Enter amount to withdraw:");
+		depositLabel = new JLabel("Enter amount to deposit:");
 		pinField = new JPasswordField(4);
 		newPinField = new JPasswordField(4);
 		newPinField2 = new JPasswordField(4);
 		oldPinField = new JPasswordField(4);
+		withdrawField = new JTextField(3);
+		depositField = new JTextField(3);
 		transactionLabel = new JLabel("Please select a transaction.");
 		withdrawButton = new JButton("Withdraw");
 		depositButton = new JButton("Deposit");
 		chgPinButton = new JButton("Change Pin");
 		infoButton = new JButton("View Account Information");
 		exitButton = new JButton("Exit");
-		submitButton = new JButton("Submit");
+		submitChgPinBtn = new JButton("Submit");
 		cancelButton = new JButton("Cancel");
+		emergencyButton = new JButton("I need Assistance!");
+		submitWithdrawBtn = new JButton("Withdraw");
+		submitDepositBtn = new JButton("Deposit");
 	}
 	
 	public void gui()
@@ -99,16 +119,18 @@ public class Panel extends JFrame implements ActionListener{
 		mainPanel.add(welcomePanel , "1");
 		mainPanel.add(passwordPanel, "2");
 		mainPanel.add(transactionPanel, "3");
-		mainPanel.add(chgPinPanel  , "4");
+		mainPanel.add( chgPinPanel  , "4");
 		mainPanel.add(infoPanel, "5");
 		mainPanel.add(withdrawPanel , "6");
+		mainPanel.add(depositPanel , "7");
 		
 		this.welcomeMenu();
 		this.passwordMenu();
 		this.transactionMenu();
 		this.chgPinMenu();
-		//this.infoPanel();
+		this.infoPanel();
 		this.withdrawMenu();
+		this.depositMenu();
 		
 		add(mainPanel);
 		setSize(FRAME_WIDTH , FRAME_HEIGHT);
@@ -205,10 +227,15 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.insets = new Insets(20 , 0 , 0 , 0);
 		transactionPanel.add(exitButton, gbc);
 		
+		emergencyButton.addActionListener(this);
+		gbc.anchor = GridBagConstraints.SOUTH;
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		transactionPanel.add(emergencyButton, gbc);
 	}
-	//public void infoPanel(){
+	public void infoPanel(){
 		
-	//}
+	}
 	
 	public void chgPinMenu()
 	{
@@ -258,20 +285,57 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridy = 3;
 		chgPinPanel.add(cancelButton , gbc);
 		
-		submitButton.addActionListener(this);
+		submitChgPinBtn.addActionListener(this);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 1;
 		gbc.gridy = 3;
-		chgPinPanel.add(submitButton , gbc);				
+		chgPinPanel.add(submitChgPinBtn , gbc);	
 	}
 	public void withdrawMenu()
 	{
 		withdrawPanel.setLayout(new GridBagLayout());
 		
+		withdrawButton.addActionListener(this);
+		
 		withdrawLabel.setFont(new Font("calibri" , Font.BOLD , 30));
 		gbc.gridx = 0;
-		gbc.gridy = 1;
+		gbc.gridy = 0;
 		withdrawPanel.add(withdrawLabel , gbc);
+		
+		withdrawField.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		gbc.insets = new Insets(0 , 0 , 50 , 0 );
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		withdrawPanel.add(withdrawField, gbc);
+		
+		submitWithdrawBtn.addActionListener(this);
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		withdrawPanel.add(submitWithdrawBtn , gbc);
+	}
+	public void depositMenu()
+	{
+		depositPanel.setLayout(new GridBagLayout());
+		
+		depositButton.addActionListener(this);
+		
+		depositLabel.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		depositPanel.add(depositLabel , gbc);
+		
+		depositField.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		gbc.insets = new Insets(0 , 0 , 50 , 0 );
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		depositPanel.add(depositField, gbc);
+		
+		submitDepositBtn.addActionListener(this);
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		depositPanel.add(submitDepositBtn , gbc);
 	}
 	public void actionPerformed(ActionEvent event)
 	{
@@ -291,6 +355,7 @@ public class Panel extends JFrame implements ActionListener{
 				if(in.hasNextLine()){
 					cardPin = in.nextLine();
 					card.setPin(Integer.parseInt(cardPin), selectedFile);
+					bAccount = new BankAccount(card.getCardNumber(), Integer.parseInt(cardPin),  5,  2017, "Ted");
 				} //yes it writes it to itself, I'm being lazy				
 				mainLayout.show(mainPanel , "2");
 			}			
@@ -299,16 +364,12 @@ public class Panel extends JFrame implements ActionListener{
 			setVisible(false); 
 			dispose();
 		}
-		else if(event.getSource() == submitButton){
+		else if(event.getSource() == submitChgPinBtn){
 			oldPin = Integer.parseInt(new String(oldPinField.getPassword()));
 			newPin = Integer.parseInt(new String(newPinField.getPassword()));
 			newPin2 = Integer.parseInt(new String(newPinField2.getPassword()));					
 			
 			cMan.setPin(oldPin,newPin,newPin2,selectedFile);
-			
-			oldPinField.selectAll();
-			newPinField.selectAll();
-			newPinField2.selectAll();
 			
 			mainLayout.show(mainPanel , "3");
 		}
@@ -319,14 +380,31 @@ public class Panel extends JFrame implements ActionListener{
 		else if(event.getSource() == chgPinButton){
 			mainLayout.show(mainPanel , "4");
 		}
+		else if(event.getSource() == submitWithdrawBtn){
+			//need to enter amount
+			//save amount to variable transAmount (need to parse int)
+			transAmount = Integer.parseInt(withdrawField.getText());
+			Transactions transaction = new Transactions(bAccount);
+			transaction.withdraw(transAmount);
+		}
+		else if(event.getSource() == submitDepositBtn){
+			//need to enter amount
+			//save amount to variable transAmount (need to parse int)
+			transAmount = Integer.parseInt(depositField.getText());
+			Transactions transaction = new Transactions(bAccount);
+			transaction.deposit(transAmount);
+		}
+		else if(event.getSource() == infoButton){
+			//stuff
+		}
+		else if(event.getSource() == emergencyButton) {
+			// stuff
+		}
 		else if(event.getSource() == withdrawButton){
 			mainLayout.show(mainPanel , "6");
 		}
 		else if(event.getSource() == depositButton){
-			//stuff
-		}
-		else if(event.getSource() == infoButton){
-			//stuff
+			mainLayout.show(mainPanel , "7");
 		}
 		
 		if(OK.equals(command)){

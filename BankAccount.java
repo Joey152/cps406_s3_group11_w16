@@ -1,5 +1,5 @@
-
 public class BankAccount {
+	
 	private int accountNumber;
 	private int pin;
 	private boolean allowAccess = false;
