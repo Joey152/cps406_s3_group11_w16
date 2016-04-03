@@ -53,9 +53,9 @@ public class Panel extends JFrame implements ActionListener{
 	public JPasswordField oldPinField;
 	public int oldPin;
 	public int newPin;
-	public int newPin2;
-	
+	public int newPin2;	
 	public static final String OK = "OK";
+	private File selectedFile;
 	
 	public Panel() 
 	{
@@ -87,6 +87,7 @@ public class Panel extends JFrame implements ActionListener{
 		submitButton = new JButton("Submit");
 		cancelButton = new JButton("Cancel");
 	}
+	
 	public void gui()
 	{
 		mainPanel.setLayout(mainLayout);
@@ -105,6 +106,7 @@ public class Panel extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+	
 	public void welcomeMenu()
 	{
 		welcomePanel.setLayout(new GridBagLayout());
@@ -247,7 +249,7 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 1;
 		gbc.gridy = 3;
-		chgPinPanel.add(submitButton , gbc);
+		chgPinPanel.add(submitButton , gbc);				
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -259,7 +261,7 @@ public class Panel extends JFrame implements ActionListener{
 			JFileChooser chooser = new JFileChooser();
 			
 			if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
-				File selectedFile = chooser.getSelectedFile();
+				selectedFile = chooser.getSelectedFile();
 				try {
 					in = new Scanner(selectedFile);
 				} catch (FileNotFoundException e) {
@@ -279,13 +281,19 @@ public class Panel extends JFrame implements ActionListener{
 		else if(event.getSource() == submitButton){
 			oldPin = Integer.parseInt(new String(oldPinField.getPassword()));
 			newPin = Integer.parseInt(new String(newPinField.getPassword()));
-			newPin2 = Integer.parseInt(new String(newPinField2.getPassword()));
+			newPin2 = Integer.parseInt(new String(newPinField2.getPassword()));					
+			
+			cMan.setPin(oldPin,newPin,newPin2,selectedFile);
 			
 			oldPinField.selectAll();
 			newPinField.selectAll();
 			newPinField.selectAll();
 			
 			mainLayout.show(mainPanel , "3");
+		}
+		else if(event.getSource() == cancelButton){
+		 	mainLayout.show(mainPanel, "3");
+			System.out.println("cancel (going back)");	
 		}
 		else if(event.getSource() == chgPinButton){
 			mainLayout.show(mainPanel , "4");
