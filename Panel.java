@@ -283,6 +283,10 @@ public class Panel extends JFrame implements ActionListener{
 			
 			mainLayout.show(mainPanel , "3");
 		}
+		else if(event.getSource() == cancelButton){
+		 	mainLayout.show(mainPanel, "3");
+			System.out.println("cancel (going back)");	
+		}
 		else if(event.getSource() == chgPinButton){
 			mainLayout.show(mainPanel , "4");
 		}
