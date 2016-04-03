@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -9,10 +10,10 @@ public class Printer {
 	private Transactions transactions;
 	private BankAccount account;
 	private String name;
-	private int[] type;
-	private String[] date;
-	private int[] balance;
-	private int[] amount;
+	private ArrayList<Integer> type;
+	private ArrayList<String> date;
+	private ArrayList<Integer> balance;
+	private ArrayList<Integer> amount;
 
 	
 	public Printer(Transactions t) {
@@ -32,11 +33,11 @@ public class Printer {
 		pw.println("Receipt");
 		pw.println("Name:\t" + name);
 		pw.println("Card Number:\t" + account.getAccountNumber());
-		pw.println("Date:\t" + date[0]);
+		pw.println("Date:\t" + date.get(0));
 		pw.println();
-		for(int i = 0; i < type.length; i++) {
+		for(int i = 0; i < type.size(); i++) {
 			String t = "";
-			switch(type[i]) {
+			switch(type.get(i)) {
 			case 1:
 				t = "Deposit";
 				break;
@@ -48,8 +49,8 @@ public class Printer {
 				break;
 			}
 			pw.println("Transaction:\t" + t);
-			pw.println("Amount:\t" + amount[i]);
-			pw.println("Balance:\t" + balance[i]);
+			pw.println("Amount:\t" + amount.get(i));
+			pw.println("Balance:\t" + balance.get(i));
 			pw.println();
 		}
 		pw.close();
