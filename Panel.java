@@ -164,13 +164,14 @@ public class Panel extends JFrame implements ActionListener{
 		transactionPanel.add(infoButton , gbc);
 		
 		gbc.fill = GridBagConstraints.NONE;
-		
+		exitButton.addActionListener(this);
 		gbc.gridx = 0;
 		gbc.gridy = 5;
 		gbc.ipady = 20;
 		gbc.ipadx = 20;
 		gbc.insets = new Insets(20 , 0 , 0 , 0);
 		transactionPanel.add(exitButton, gbc);
+		
 	}
 	public void actionPerformed(ActionEvent event)
 	{
@@ -190,8 +191,13 @@ public class Panel extends JFrame implements ActionListener{
 					card.setPin(Integer.parseInt(cardPin), selectedFile);
 				} //yes it writes it to itself, I'm being lazy
 				cLayout.show(mainPanel , "2");		
-			}
-		}		
+			}			
+
+		}
+		else if(event.getSource() == exitButton){
+			setVisible(false); 
+			dispose();
+		}
 		if(OK.equals(command)){
 //--------------------This part does not belong here.-----------------------------//	
 			String userPin = new String(passwordField.getPassword());
