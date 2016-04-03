@@ -43,8 +43,8 @@ public class Panel extends JFrame implements ActionListener{
 	public JButton infoButton;
 	public JButton chgPinButton;
 	public JButton exitButton;
+	private Card card = new Card(0,0,0,0); //sadly needed to do this, lazy programming, I know
 	private JButton emergencyButton;
-	private Card card = new Card(0,0,0,0);
 	private CardManager cMan = new CardManager(card);
 	public JButton submitButton;
 	public JButton cancelButton;
@@ -58,6 +58,8 @@ public class Panel extends JFrame implements ActionListener{
 	public int newPin2;	
 	public static final String OK = "OK";
 	private File selectedFile;
+	private int transAmount;
+	private BankAccount bAccount;
 	
 	public Panel() 
 	{
@@ -285,6 +287,7 @@ public class Panel extends JFrame implements ActionListener{
 				if(in.hasNextLine()){
 					cardPin = in.nextLine();
 					card.setPin(Integer.parseInt(cardPin), selectedFile);
+					bAccount = new BankAccount(card.getCardNumber(), Integer.parseInt(cardPin),  5,  2017, "Ted");
 				} //yes it writes it to itself, I'm being lazy				
 				mainLayout.show(mainPanel , "2");
 			}			
@@ -310,10 +313,18 @@ public class Panel extends JFrame implements ActionListener{
 			mainLayout.show(mainPanel , "4");
 		}
 		else if(event.getSource() == withdrawButton){
-			//stuff
+			//need to enter amount
+			//save amount to variable transAmount (need to parse int)
+			transAmount = 0;
+			Transactions transaction = new Transactions(bAccount);
+			transaction.withdraw(transAmount);
 		}
 		else if(event.getSource() == depositButton){
-			//stuff
+			//need to enter amount
+			//save amount to variable transAmount (need to parse int)
+			transAmount = 0;
+			Transactions transaction = new Transactions(bAccount);
+			transaction.deposit(transAmount);
 		}
 		else if(event.getSource() == infoButton){
 			//stuff
