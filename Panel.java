@@ -49,12 +49,9 @@ public class Panel extends JFrame implements ActionListener{
 	public JButton infoButton;
 	public JButton chgPinButton;
 	public JButton exitButton;
-<<<<<<< HEAD
 	public JButton submitWithdrawBtn;
 	public JButton submitDepositBtn;
 	public JButton submitChgPinBtn;
-=======
->>>>>>> branch 'master' of https://github.com/Joey152/cps406_s3_group11_w16.git
 	private Card card = new Card(0,0,0,0); //sadly needed to do this, lazy programming, I know
 	private JButton emergencyButton;
 	private CardManager cMan = new CardManager(card);
@@ -73,10 +70,7 @@ public class Panel extends JFrame implements ActionListener{
 	private File selectedFile;
 	private int transAmount;
 	private BankAccount bAccount;
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/Joey152/cps406_s3_group11_w16.git
 	
 	public Panel() 
 	{
@@ -115,11 +109,10 @@ public class Panel extends JFrame implements ActionListener{
 		submitChgPinBtn = new JButton("Submit");
 		cancelButton = new JButton("Cancel");
 		emergencyButton = new JButton("I need Assistance!");
-<<<<<<< HEAD
 		submitWithdrawBtn = new JButton("Withdraw");
 		submitDepositBtn = new JButton("Deposit");
-=======
->>>>>>> branch 'master' of https://github.com/Joey152/cps406_s3_group11_w16.git
+
+
 	}
 	
 	public void gui()
@@ -364,7 +357,7 @@ public class Panel extends JFrame implements ActionListener{
 				if(in.hasNextLine()){
 					cardPin = in.nextLine();
 					card.setPin(Integer.parseInt(cardPin), selectedFile);
-					bAccount = new BankAccount(card.getCardNumber(), Integer.parseInt(cardPin),  5,  2017, "Ted");
+					bAccount = new BankAccount(card ,  "Ted");
 				} //yes it writes it to itself, I'm being lazy				
 				mainLayout.show(mainPanel , "2");
 			}			
@@ -389,31 +382,17 @@ public class Panel extends JFrame implements ActionListener{
 		else if(event.getSource() == chgPinButton){
 			mainLayout.show(mainPanel , "4");
 		}
-<<<<<<< HEAD
 		else if(event.getSource() == submitWithdrawBtn){
 			//need to enter amount
 			//save amount to variable transAmount (need to parse int)
 			transAmount = Integer.parseInt(withdrawField.getText());
-=======
-		else if(event.getSource() == withdrawButton){
-			//need to enter amount
-			//save amount to variable transAmount (need to parse int)
-			transAmount = 0;
->>>>>>> branch 'master' of https://github.com/Joey152/cps406_s3_group11_w16.git
 			Transactions transaction = new Transactions(bAccount);
 			transaction.withdraw(transAmount);
 		}
-<<<<<<< HEAD
 		else if(event.getSource() == submitDepositBtn){
 			//need to enter amount
 			//save amount to variable transAmount (need to parse int)
 			transAmount = Integer.parseInt(depositField.getText());
-=======
-		else if(event.getSource() == depositButton){
-			//need to enter amount
-			//save amount to variable transAmount (need to parse int)
-			transAmount = 0;
->>>>>>> branch 'master' of https://github.com/Joey152/cps406_s3_group11_w16.git
 			Transactions transaction = new Transactions(bAccount);
 			transaction.deposit(transAmount);
 		}
