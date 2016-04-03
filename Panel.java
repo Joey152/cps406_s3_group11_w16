@@ -43,6 +43,7 @@ public class Panel extends JFrame implements ActionListener{
 	public JButton infoButton;
 	public JButton chgPinButton;
 	public JButton exitButton;
+	private JButton emergencyButton;
 	private Card card = new Card(0,0,0,0);
 	private CardManager cMan = new CardManager(card);
 	public JButton submitButton;
@@ -88,6 +89,7 @@ public class Panel extends JFrame implements ActionListener{
 		exitButton = new JButton("Exit");
 		submitButton = new JButton("Submit");
 		cancelButton = new JButton("Cancel");
+		emergencyButton = new JButton("I need Assistance!");
 	}
 	
 	public void gui()
@@ -135,6 +137,10 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		welcomePanel.add(cardButton , gbc);
+		
+		emergencyButton.addActionListener(this);
+		gbc.anchor = GridBagConstraints.SOUTH;
+		welcomePanel.add(emergencyButton, gbc);
 	}	
 	public void passwordMenu()
 	{
@@ -158,6 +164,10 @@ public class Panel extends JFrame implements ActionListener{
 		passwordPanel.add(pinField , gbc);
 		
 		gbc.weighty = 0;
+		
+		emergencyButton.addActionListener(this);
+		gbc.anchor = GridBagConstraints.SOUTH;
+		passwordPanel.add(emergencyButton, gbc);
 	}	
 	public void transactionMenu()
 	{
@@ -200,6 +210,9 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.insets = new Insets(20 , 0 , 0 , 0);
 		transactionPanel.add(exitButton, gbc);
 		
+		emergencyButton.addActionListener(this);
+		gbc.anchor = GridBagConstraints.SOUTH;
+		transactionPanel.add(emergencyButton, gbc);
 	}
 	public void infoPanel(){
 		
@@ -257,7 +270,11 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 1;
 		gbc.gridy = 3;
-		chgPinPanel.add(submitButton , gbc);				
+		chgPinPanel.add(submitButton , gbc);	
+		
+		emergencyButton.addActionListener(this);
+		gbc.anchor = GridBagConstraints.SOUTH;
+		chgPinPanel.add(emergencyButton, gbc);
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -311,6 +328,7 @@ public class Panel extends JFrame implements ActionListener{
 		else if(event.getSource() == infoButton){
 			//stuff
 		}
+		else if(event.getSource() == emergencyButton)
 		
 		if(OK.equals(command)){
 //--------------------This part does not belong here.-----------------------------//	
