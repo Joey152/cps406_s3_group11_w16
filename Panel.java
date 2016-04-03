@@ -51,7 +51,6 @@ public class Panel extends JFrame implements ActionListener{
 	public JPasswordField newPinField;
 	public JPasswordField newPinField2;
 	public JPasswordField oldPinField;
-	
 	public static final String OK = "OK";
 	
 	public Panel() 
@@ -84,6 +83,7 @@ public class Panel extends JFrame implements ActionListener{
 		submitButton = new JButton("Submit");
 		cancelButton = new JButton("Cancel");
 	}
+	
 	public void gui()
 	{
 		mainPanel.setLayout(mainLayout);
@@ -102,6 +102,7 @@ public class Panel extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+	
 	public void welcomeMenu()
 	{
 		welcomePanel.setLayout(new GridBagLayout());
