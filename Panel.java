@@ -42,6 +42,8 @@ public class Panel extends JFrame implements ActionListener{
 	public JButton exitButton;
 	public CardLayout cLayout;
 	public JPasswordField passwordField;
+	private Card card = new Card(0,0,0,0);
+	private CardManager cMan = new CardManager(card);
 	
 	public static final String OK = "OK";
 	
@@ -173,8 +175,8 @@ public class Panel extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent event)
 	{
 		String command = event.getActionCommand();
-		if(event.getSource() == cardButton){
-		    Scanner in = null;
+		if(event.getSource() == cardButton){	    
+			Scanner in = null;
 			JFileChooser chooser = new JFileChooser();
 			if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
 				File selectedFile = chooser.getSelectedFile();
@@ -185,10 +187,11 @@ public class Panel extends JFrame implements ActionListener{
 				}
 				if(in.hasNextLine()){
 					cardPin = in.nextLine();
-				}
-				cLayout.show(mainPanel , "2");
+					card.setPin(Integer.parseInt(cardPin), selectedFile);
+				} //yes it writes it to itself, I'm being lazy
+				cLayout.show(mainPanel , "2");		
 			}
-		}
+		}		
 		if(OK.equals(command)){
 //--------------------This part does not belong here.-----------------------------//	
 			String userPin = new String(passwordField.getPassword());

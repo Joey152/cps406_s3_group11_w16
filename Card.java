@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 
 public class Card {
@@ -6,9 +9,10 @@ public class Card {
 	Calendar expirationDate = Calendar.getInstance();
 	String cardName;
 	
+	
 	public Card(int cardNum, int pin, int month, int year)
 	{                            
-		expirationDate.set(year,month-1,1,0,0,0);                       //sets the expiration date
+		expirationDate.set(year,month-1,1,0,0,0);   //sets the expiration date
 		this.cardNumber = cardNum;
 		this.pin = pin;
 	}
@@ -23,9 +27,18 @@ public class Card {
 		return cardNumber;
 	}
 	
-	public void setPin(int pin)
+	public void setPin(int pin, File cardFile)
 	{
 		this.pin = pin;
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(cardFile);
+		} catch (FileNotFoundException e) {
+			System.out.println("CARD VANISHED?!?");
+			return;
+		}
+		writer.print(pin);
+		writer.close();
 	}
 	
 	public int getPin()

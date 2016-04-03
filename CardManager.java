@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Calendar;
 
 public class CardManager{
@@ -18,7 +19,7 @@ public class CardManager{
 		return false;
 	}
 	
-	public boolean setPin(int oldPin, int newPin, int newPin2)
+	public boolean setPin(int oldPin, int newPin, int newPin2, File cardFile)
 	{
 		if(oldPin != card.getPin())
 		{
@@ -28,7 +29,7 @@ public class CardManager{
 		{
 			return false;
 		}
-		card.setPin(newPin);
+		card.setPin(newPin, cardFile);
 		return true;
 	}
 	
