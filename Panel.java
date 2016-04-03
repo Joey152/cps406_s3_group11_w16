@@ -137,10 +137,6 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		welcomePanel.add(cardButton , gbc);
-		
-		emergencyButton.addActionListener(this);
-		gbc.anchor = GridBagConstraints.SOUTH;
-		welcomePanel.add(emergencyButton, gbc);
 	}	
 	public void passwordMenu()
 	{
@@ -164,10 +160,6 @@ public class Panel extends JFrame implements ActionListener{
 		passwordPanel.add(pinField , gbc);
 		
 		gbc.weighty = 0;
-		
-		emergencyButton.addActionListener(this);
-		gbc.anchor = GridBagConstraints.SOUTH;
-		passwordPanel.add(emergencyButton, gbc);
 	}	
 	public void transactionMenu()
 	{
@@ -212,6 +204,8 @@ public class Panel extends JFrame implements ActionListener{
 		
 		emergencyButton.addActionListener(this);
 		gbc.anchor = GridBagConstraints.SOUTH;
+		gbc.gridx = 0;
+		gbc.gridy = 6;
 		transactionPanel.add(emergencyButton, gbc);
 	}
 	public void infoPanel(){
@@ -271,10 +265,6 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		chgPinPanel.add(submitButton , gbc);	
-		
-		emergencyButton.addActionListener(this);
-		gbc.anchor = GridBagConstraints.SOUTH;
-		chgPinPanel.add(emergencyButton, gbc);
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -328,7 +318,9 @@ public class Panel extends JFrame implements ActionListener{
 		else if(event.getSource() == infoButton){
 			//stuff
 		}
-		else if(event.getSource() == emergencyButton)
+		else if(event.getSource() == emergencyButton) {
+			// stuff
+		}
 		
 		if(OK.equals(command)){
 //--------------------This part does not belong here.-----------------------------//	
