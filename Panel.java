@@ -339,7 +339,9 @@ public class Panel extends JFrame implements ActionListener{
 		else if(event.getSource() == infoButton){
 			//stuff
 		}
-		else if(event.getSource() == emergencyButton)
+		else if(event.getSource() == emergencyButton) {
+			// stuff
+		}
 		
 		if(OK.equals(command)){
 //--------------------This part does not belong here.-----------------------------//	
