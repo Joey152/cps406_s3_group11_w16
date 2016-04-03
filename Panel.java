@@ -51,6 +51,9 @@ public class Panel extends JFrame implements ActionListener{
 	public JPasswordField newPinField;
 	public JPasswordField newPinField2;
 	public JPasswordField oldPinField;
+	public int oldPin;
+	public int newPin;
+	public int newPin2;
 	
 	public static final String OK = "OK";
 	
@@ -272,6 +275,13 @@ public class Panel extends JFrame implements ActionListener{
 		else if(event.getSource() == exitButton){
 			setVisible(false); 
 			dispose();
+		}
+		else if(event.getSource() == submitButton){
+			oldPin = Integer.parseInt(new String(oldPinField.getPassword()));
+			newPin = Integer.parseInt(new String(newPinField.getPassword()));
+			newPin2 = Integer.parseInt(new String(newPinField2.getPassword()));
+			
+			mainLayout.show(mainPanel , "3");
 		}
 		else if(event.getSource() == chgPinButton){
 			mainLayout.show(mainPanel , "4");
