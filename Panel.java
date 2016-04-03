@@ -1,5 +1,3 @@
-
-
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import java.awt.CardLayout;
@@ -192,7 +190,6 @@ public class Panel extends JFrame implements ActionListener{
 				} //yes it writes it to itself, I'm being lazy
 				cLayout.show(mainPanel , "2");		
 			}			
-
 		}
 		else if(event.getSource() == exitButton){
 			setVisible(false); 

@@ -1,15 +1,17 @@
 
 public class BankAccount {
-	int accountNumber;
-	int pin;
-	boolean allowAccess = false;
-	int pinTries = 5;
-	String name;
-	int maxWithdraw;
-	int minWithdraw;
-	boolean cardStatus;
-	Card c;
-	CardManager cm;
+	private int accountNumber;
+	private int pin;
+	private boolean allowAccess = false;
+	private int pinTries = 5;
+	private String name;
+	private int maxWithdraw;
+	private int minWithdraw;
+	private boolean cardStatus;
+	private Card c;
+	private CardManager cm;
+	private int balance;
+	
 	
 	public BankAccount(int cardNum, int pin, int month, int year, String name)
 	{
@@ -33,5 +35,25 @@ public class BankAccount {
 	public int getAccountNumber()
 	{
 		return accountNumber;
+	}
+	
+	public int getAccountBalance()
+	{
+		return balance;		
+	}
+	
+	public void setAccountBalance(int newBal)
+	{
+		this.balance = newBal;
+	}
+	
+	public int getMinWithdraw()
+	{
+		return this.minWithdraw;
+	}
+	
+	public int getMaxWithdraw()
+	{
+		return this.maxWithdraw;
 	}
 }
