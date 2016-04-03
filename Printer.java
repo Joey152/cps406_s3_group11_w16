@@ -13,6 +13,7 @@ public class Printer {
 	private String[] date;
 	private int[] balance;
 	private int[] amount;
+private int[] testVar;
 	
 	public Printer(Transactions t) {
 		transactions = t;
