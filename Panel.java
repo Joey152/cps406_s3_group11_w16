@@ -287,7 +287,7 @@ public class Panel extends JFrame implements ActionListener{
 			
 			oldPinField.selectAll();
 			newPinField.selectAll();
-			newPinField.selectAll();
+			newPinField2.selectAll();
 			
 			mainLayout.show(mainPanel , "3");
 		}
