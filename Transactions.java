@@ -15,7 +15,7 @@ public class Transactions {
 	private ArrayList<Integer> transactionAmount;
 	private PrintWriter pw;
 	
-	public Transactions(BankAccount account) throws IOException {
+	public Transactions(BankAccount account){
 		String fileName;
 		
 		this.account = account;
@@ -24,7 +24,11 @@ public class Transactions {
 		transactionBalance = new ArrayList<>();
 		transactionAmount = new ArrayList<>();
 		fileName = account.getAccountNumber() + ".txt";
-		pw = new PrintWriter(new FileWriter(fileName));
+		try {
+			pw = new PrintWriter(new FileWriter(fileName));
+		} catch (IOException e) {
+			System.out.println("Error: Printing File Not Found");
+		}
 	}
 	
 	/**

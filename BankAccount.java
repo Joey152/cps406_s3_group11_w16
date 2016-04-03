@@ -1,4 +1,3 @@
-
 public class BankAccount {
 	private int accountNumber;
 	private int pin;
