@@ -287,12 +287,24 @@ public class Panel extends JFrame implements ActionListener{
 				if(in.hasNextLine()){
 					cardPin = in.nextLine();
 					card.setPin(Integer.parseInt(cardPin), selectedFile);
-					bAccount = new BankAccount(card.getCardNumber(), Integer.parseInt(cardPin),  5,  2017, "Ted");
+					bAccount = new BankAccount(card, "Ted");
 				} //yes it writes it to itself, I'm being lazy				
 				mainLayout.show(mainPanel , "2");
 			}			
 		}
 		else if(event.getSource() == exitButton){
+			//prompt for donate to charity
+			//if yes
+			boolean donate = false;
+			if(donate)
+			{
+				Transactions transaction = new Transactions(bAccount);
+				transaction.withdraw(1);
+				/*transaction = new Transactions(charity);
+				 * transaction.deposit(1)
+				 */
+				//likely this is not how an atm would do it, this is placeholder
+			}
 			setVisible(false); 
 			dispose();
 		}
