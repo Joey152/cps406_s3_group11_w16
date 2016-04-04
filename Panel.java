@@ -1,5 +1,6 @@
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -30,6 +31,8 @@ public class Panel extends JFrame implements ActionListener{
 	public JPanel chgPinPanel;
 	public JPanel infoPanel;
 	private JPanel historyPanel;
+	public JPanel withdrawPanel;
+	public JPanel depositPanel;
 	public GridBagConstraints gbc;
 	public JLabel welcomeLabel;
 	public JLabel insertCardLabel;
@@ -38,6 +41,8 @@ public class Panel extends JFrame implements ActionListener{
 	public JLabel oldPinLabel;
 	public JLabel newPinLabel;
 	public JLabel newPinLabel2;
+	public JLabel withdrawLabel;
+	public JLabel depositLabel;
 	public JButton cardButton;
 	public JButton depositButton;
 	public JButton withdrawButton;
@@ -47,16 +52,20 @@ public class Panel extends JFrame implements ActionListener{
 	private JButton backToMenu;
 	private JButton backToInfo;
 	private JButton historyButton;
+	public JButton submitWithdrawBtn;
+	public JButton submitDepositBtn;
+	public JButton submitChgPinBtn;
 	private Card card = new Card(0,0,0,0); //sadly needed to do this, lazy programming, I know
 	private JButton emergencyButton;
 	private CardManager cMan = new CardManager(card);
-	public JButton submitButton;
 	public JButton cancelButton;
 	public CardLayout mainLayout;
 	public JPasswordField pinField;
 	public JPasswordField newPinField;
 	public JPasswordField newPinField2;
 	public JPasswordField oldPinField;
+	public JTextField withdrawField;
+	public JTextField depositField;
 	public int oldPin;
 	public int newPin;
 	public int newPin2;	
@@ -76,6 +85,8 @@ public class Panel extends JFrame implements ActionListener{
 		chgPinPanel = new JPanel();
 		infoPanel = new JPanel();
 		historyPanel = new JPanel();
+		withdrawPanel = new JPanel();
+		depositPanel = new JPanel();
 		mainLayout = new CardLayout();
 		gbc = new GridBagConstraints();
 		welcomeLabel = new JLabel("Welcome!");
@@ -85,22 +96,29 @@ public class Panel extends JFrame implements ActionListener{
 		oldPinLabel = new JLabel("Enter old pin:");
 		newPinLabel = new JLabel("Enter new pin:");
 		newPinLabel2 = new JLabel("Verify new pin:");
+		withdrawLabel = new JLabel("Enter amount to withdraw:");
+		depositLabel = new JLabel("Enter amount to deposit:");
 		pinField = new JPasswordField(4);
 		newPinField = new JPasswordField(4);
 		newPinField2 = new JPasswordField(4);
 		oldPinField = new JPasswordField(4);
+		withdrawField = new JTextField(3);
+		depositField = new JTextField(3);
 		transactionLabel = new JLabel("Please select a transaction.");
 		withdrawButton = new JButton("Withdraw");
 		depositButton = new JButton("Deposit");
 		chgPinButton = new JButton("Change Pin");
 		infoButton = new JButton("View Account Information");
 		exitButton = new JButton("Exit");
-		submitButton = new JButton("Submit");
+		submitChgPinBtn = new JButton("Submit");
 		cancelButton = new JButton("Cancel");
 		backToMenu = new JButton("Back");
 		backToInfo = new JButton("Back");
 		emergencyButton = new JButton("I need Assistance!");
 		historyButton = new JButton("Print transaction history");
+		submitWithdrawBtn = new JButton("Withdraw");
+		submitDepositBtn = new JButton("Deposit");
+
 	}
 	
 	public void gui()
@@ -112,11 +130,15 @@ public class Panel extends JFrame implements ActionListener{
 		mainPanel.add( chgPinPanel  , "4");
 		mainPanel.add(infoPanel, "5");
 		mainPanel.add(historyPanel, "6");
+		mainPanel.add(withdrawPanel , "6");
+		mainPanel.add(depositPanel , "7");
 		
 		this.welcomeMenu();
 		this.passwordMenu();
 		this.transactionMenu();
-		this.chgPinMenu();		
+		this.chgPinMenu();
+		this.withdrawMenu();
+		this.depositMenu();
 		
 		add(mainPanel);
 		setSize(FRAME_WIDTH , FRAME_HEIGHT);
@@ -323,13 +345,58 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridy = 3;
 		chgPinPanel.add(cancelButton , gbc);
 		
-		submitButton.addActionListener(this);
+		submitChgPinBtn.addActionListener(this);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 1;
 		gbc.gridy = 3;
-		chgPinPanel.add(submitButton , gbc);	
+		chgPinPanel.add(submitChgPinBtn , gbc);	
 	}
-	
+	public void withdrawMenu()
+	{
+		withdrawPanel.setLayout(new GridBagLayout());
+		
+		withdrawButton.addActionListener(this);
+		
+		withdrawLabel.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		withdrawPanel.add(withdrawLabel , gbc);
+		
+		withdrawField.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		gbc.insets = new Insets(0 , 0 , 50 , 0 );
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		withdrawPanel.add(withdrawField, gbc);
+		
+		submitWithdrawBtn.addActionListener(this);
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		withdrawPanel.add(submitWithdrawBtn , gbc);
+	}
+	public void depositMenu()
+	{
+		depositPanel.setLayout(new GridBagLayout());
+		
+		depositButton.addActionListener(this);
+		
+		depositLabel.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		depositPanel.add(depositLabel , gbc);
+		
+		depositField.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		gbc.insets = new Insets(0 , 0 , 50 , 0 );
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		depositPanel.add(depositField, gbc);
+		
+		submitDepositBtn.addActionListener(this);
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		depositPanel.add(submitDepositBtn , gbc);
+	}
 	public void actionPerformed(ActionEvent event)
 	{
 		String command = event.getActionCommand();		
@@ -351,7 +418,7 @@ public class Panel extends JFrame implements ActionListener{
 					bAccount = new BankAccount(card, "Ted");
 					transaction = new Transactions(bAccount);
 				} //yes it writes it to itself, I'm being lazy
-				this.infoPanel();
+				this.infoPanel();				
 				mainLayout.show(mainPanel , "2");
 			}			
 		}
@@ -359,7 +426,7 @@ public class Panel extends JFrame implements ActionListener{
 			setVisible(false); 
 			dispose();
 		}
-		else if(event.getSource() == submitButton){
+		else if(event.getSource() == submitChgPinBtn){
 			oldPin = Integer.parseInt(new String(oldPinField.getPassword()));
 			newPin = Integer.parseInt(new String(newPinField.getPassword()));
 			newPin2 = Integer.parseInt(new String(newPinField2.getPassword()));					
@@ -375,20 +442,29 @@ public class Panel extends JFrame implements ActionListener{
 		else if(event.getSource() == chgPinButton){
 			mainLayout.show(mainPanel , "4");
 		}
-		else if(event.getSource() == withdrawButton){
+		else if(event.getSource() == submitWithdrawBtn){
 			//need to enter amount
 			//save amount to variable transAmount (need to parse int)
-			transAmount = 0;
+			transAmount = Integer.parseInt(withdrawField.getText());
 			transaction.withdraw(transAmount);
 		}
-		else if(event.getSource() == depositButton){
+		else if(event.getSource() == submitDepositBtn){
 			//need to enter amount
 			//save amount to variable transAmount (need to parse int)
-			transAmount = 0;
+			transAmount = Integer.parseInt(depositField.getText());
 			transaction.deposit(transAmount);
 		}
 		else if(event.getSource() == infoButton || event.getSource() == backToInfo){
 			mainLayout.show(mainPanel , "5");
+		}
+		else if(event.getSource() == emergencyButton) {
+			// stuff
+		}
+		else if(event.getSource() == withdrawButton){
+			mainLayout.show(mainPanel , "6");
+		}
+		else if(event.getSource() == depositButton){
+			mainLayout.show(mainPanel , "7");
 		}
 		else if(event.getSource() == emergencyButton) {
 			// stuff

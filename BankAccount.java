@@ -18,6 +18,7 @@ public class BankAccount {
 		this.name = name;
 		minWithdraw = 20;
 		maxWithdraw = 100;
+		this.balance = 1000;
 	}
 	
 	public String getName()
