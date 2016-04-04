@@ -130,8 +130,8 @@ public class Panel extends JFrame implements ActionListener{
 		mainPanel.add( chgPinPanel  , "4");
 		mainPanel.add(infoPanel, "5");
 		mainPanel.add(historyPanel, "6");
-		mainPanel.add(withdrawPanel , "6");
-		mainPanel.add(depositPanel , "7");
+		mainPanel.add(withdrawPanel , "7");
+		mainPanel.add(depositPanel , "8");
 		
 		this.welcomeMenu();
 		this.passwordMenu();
@@ -292,9 +292,10 @@ public class Panel extends JFrame implements ActionListener{
 		historyPanel.add(history, gbc);
 		
 		backToInfo.addActionListener(this);
-		gbc.anchor = GridBagConstraints.SOUTH;
+		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.gridx = 0;
 		gbc.gridy = 1;
-		historyPanel.add(backToInfo);
+		historyPanel.add(backToInfo, gbc);
 	}
 	
 	public void chgPinMenu()
@@ -447,12 +448,14 @@ public class Panel extends JFrame implements ActionListener{
 			//save amount to variable transAmount (need to parse int)
 			transAmount = Integer.parseInt(withdrawField.getText());
 			transaction.withdraw(transAmount);
+			mainLayout.show(mainPanel, "3");
 		}
 		else if(event.getSource() == submitDepositBtn){
 			//need to enter amount
 			//save amount to variable transAmount (need to parse int)
 			transAmount = Integer.parseInt(depositField.getText());
 			transaction.deposit(transAmount);
+			mainLayout.show(mainPanel, "3");
 		}
 		else if(event.getSource() == infoButton || event.getSource() == backToInfo){
 			mainLayout.show(mainPanel , "5");
@@ -461,10 +464,10 @@ public class Panel extends JFrame implements ActionListener{
 			// stuff
 		}
 		else if(event.getSource() == withdrawButton){
-			mainLayout.show(mainPanel , "6");
+			mainLayout.show(mainPanel , "7");
 		}
 		else if(event.getSource() == depositButton){
-			mainLayout.show(mainPanel , "7");
+			mainLayout.show(mainPanel , "8");
 		}
 		else if(event.getSource() == emergencyButton) {
 			// stuff
