@@ -30,6 +30,13 @@ public class Panel extends JFrame implements ActionListener{
 	public JPanel transactionPanel;
 	public JPanel chgPinPanel;
 	public JPanel infoPanel;
+	//added---------------------------------------------------------------------------------------------------------------------------------------
+	public JPanel donatePanel;
+	public JPanel printingPanel, printingPanel2;
+	public JLabel donateLabel, printingLabel, printingLabel2;
+	public JButton yesButton;
+	public JButton noButton;
+	//added-------------------------------------------------------------
 	private JPanel historyPanel;
 	public JPanel withdrawPanel;
 	public JPanel depositPanel;
@@ -98,6 +105,16 @@ public class Panel extends JFrame implements ActionListener{
 		oldPinLabel = new JLabel("Enter old pin:");
 		newPinLabel = new JLabel("Enter new pin:");
 		newPinLabel2 = new JLabel("Verify new pin:");
+		//========================================================================================================================================================
+		donatePanel= new JPanel();
+		printingPanel = new JPanel(); //no
+		printingPanel2 = new JPanel(); //yes
+		donateLabel = new JLabel("Would you like to donate a looney to the DDF today?");
+		printingLabel = new JLabel("Thank you. Printing Receipt...");
+		printingLabel2 = new JLabel("Thank you SO MUCH. Printing Receipt...");
+		yesButton = new JButton("YES");
+		noButton = new JButton("NO");
+		//======================================================================================
 		withdrawLabel = new JLabel("Enter amount to withdraw:");
 		depositLabel = new JLabel("Enter amount to deposit:");
 		info = new JLabel();
@@ -136,6 +153,11 @@ public class Panel extends JFrame implements ActionListener{
 		mainPanel.add(historyPanel, "6");
 		mainPanel.add(withdrawPanel , "7");
 		mainPanel.add(depositPanel , "8");
+		//this too-------------------------------------------------------------------------------------------------------------------------------------------------
+		mainPanel.add(donatePanel, "69");
+		mainPanel.add(printingPanel, "70");//no
+		mainPanel.add(printingPanel2, "71");//yes
+		//this too-------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		this.welcomeMenu();
 		this.passwordMenu();
@@ -143,7 +165,12 @@ public class Panel extends JFrame implements ActionListener{
 		this.chgPinMenu();
 		this.withdrawMenu();
 		this.depositMenu();
-		
+		//this too-----------------------------------------------------------------------------------------------------------------------------------------------------
+		this.donatePanel();
+		this.printingPanel();
+		this.printingPanel2();
+		//this too--------------------------------------------------------------------------------------------------------------------------------------------------
+
 		add(mainPanel);
 		setSize(FRAME_WIDTH , FRAME_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -279,7 +306,59 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridwidth = 1;
 		infoPanel.add(historyButton, gbc);
 	}
-	
+	//and this-------------------------------------------------------------------------------------------------------------------------------------------
+	public void donatePanel(){
+		donatePanel.setLayout(new GridBagLayout());
+		//gbc.fill = GridBagConstraints.HORIZONTAL;
+		
+		donateLabel.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.insets = new Insets(0 , 0 , 60 , 0);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		donatePanel.add(donateLabel , gbc);
+
+		yesButton.addActionListener(this);
+		gbc.insets = new Insets(100 , 0 , 0 , 0);
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		donatePanel.add(yesButton , gbc);
+		
+		noButton.addActionListener(this);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		donatePanel.add(noButton , gbc);
+	}
+	public void printingPanel(){
+		printingPanel.setLayout(new GridBagLayout());
+		
+		printingLabel.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.insets = new Insets(0 , 0 , 60 , 0);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		printingPanel.add(printingLabel , gbc);
+		
+		//this is supposed to pause for 2 seconds then exit
+		//pause(2000);		
+		//setVisible(false); 
+		//dispose();
+	}
+	public void printingPanel2(){
+		printingPanel2.setLayout(new GridBagLayout());
+		
+		printingLabel2.setFont(new Font("calibri" , Font.BOLD , 30));
+		gbc.insets = new Insets(0 , 0 , 60 , 0);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		printingPanel2.add(printingLabel2 , gbc);
+		
+		//this is supposed to pause for 2 seconds then exit
+		//pause(2000);		
+		//setVisible(false); 
+		//dispose();
+	}
+	//till here--------------------------------------------------------------------------------------------------------------------------------------------
 	public void showHistory() {
 		historyPanel.setLayout(new GridBagLayout());
 		
@@ -420,6 +499,20 @@ public class Panel extends JFrame implements ActionListener{
 				mainLayout.show(mainPanel , "2");
 			}			
 		}
+		//changed this------------------------------------------------------------------------------------------------------------------------------------------
+		else if(event.getSource() == exitButton){
+			mainLayout.show(mainPanel, "69");
+		}
+		else if(event.getSource()== noButton){
+			mainLayout.show(mainPanel, "70");
+// 			pause(2000);		
+// 			setVisible(false); 
+// 			dispose();
+		}
+		else if(event.getSource()==yesButton){
+			mainLayout.show(mainPanel, "71");
+		}
+		//changed this--------------------------------------------------------------------------------------------------------------------------------------------
 		else if(event.getSource() == exitButton){
 			setVisible(false); 
 			dispose();
@@ -495,4 +588,13 @@ public class Panel extends JFrame implements ActionListener{
 //------------------------------------------------------------------------------------------//			
 		}
 	}
+	//pause added
+	public static void pause (int intMS){
+		try{
+			Thread.sleep(intMS);
+		}catch(InterruptedException e){
+		
+		}
+	}
+	//pasue end
 }
