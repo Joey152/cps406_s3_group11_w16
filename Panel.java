@@ -377,6 +377,7 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
+		gbc.gridwidth = 1;
 		historyPanel.add(historyLabel, gbc);
 		
 		backToInfo.addActionListener(this);
@@ -510,6 +511,7 @@ public class Panel extends JFrame implements ActionListener{
 				this.infoPanel();
 				this.printingPanel();
 				this.printingPanel2();
+				this.showHistory();
 				mainLayout.show(mainPanel , "2");
 			}			
 		}
@@ -592,9 +594,9 @@ public class Panel extends JFrame implements ActionListener{
 			// stuff
 		}
 		else if(event.getSource() == historyButton) {
-			Printer p = new Printer(transaction);
-			String str = p.printTransactionHistory();
-			historyLabel.setText(str);
+			/*Printer p = new Printer(transaction);
+			String str = p.printTransactionHistory();*/
+			historyLabel.setText("<html>Transaction history not working<br>because there is no database</html>");
 			mainLayout.show(mainPanel, "6");
 		}
 		else if(event.getSource() == backToMenu) {

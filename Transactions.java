@@ -1,3 +1,4 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -36,7 +37,7 @@ public class Transactions {
 		PrintWriter pw = null;
 		String fileName = account.getAccountNumber() + ".txt";
 		try {			
-			pw = new PrintWriter(new FileWriter(fileName), true);
+			pw = new PrintWriter(new BufferedWriter(new FileWriter(fileName)), true);
 		} catch (IOException e) {
 			System.out.println("Error: Printing File Not Found");
 		}
@@ -56,9 +57,9 @@ public class Transactions {
 		transactionBalance.add(newBalance);
 		transactionAmount.add(amount);
 		
-		pw.append("Date: " + df.format(dateobj) + "<br>");
-		pw.append("Withdraw: $" + amount + "<br>");
-		pw.append("Balance: $" + newBalance + "<br>\n");
+		pw.println("Date: " + df.format(dateobj) + "<br>");
+		pw.println("Withdraw: $" + amount + "<br>");
+		pw.println("Balance: $" + newBalance + "<br>\n");
 		pw.close();
 		return 0;
 	}
@@ -67,7 +68,7 @@ public class Transactions {
 		PrintWriter pw = null;
 		String fileName = account.getAccountNumber() + ".txt";
 		try {			
-			pw = new PrintWriter(new FileWriter(fileName), true);
+			pw = new PrintWriter(new BufferedWriter(new FileWriter(fileName)), true);
 		} catch (IOException e) {
 			System.out.println("Error: Printing File Not Found");
 		}
@@ -80,9 +81,9 @@ public class Transactions {
 		transactionBalance.add(newBalance);
 		transactionAmount.add(amount);
 		
-		pw.append("Date: " + df.format(dateobj) + "<br><br>");
-		pw.append("Deposit: $" + amount + "<br><br>");
-		pw.append("Balance: $" + newBalance + "<br>\n");
+		pw.println("Date: " + df.format(dateobj) + "<br>");
+		pw.println("Deposit: $" + amount + "<br>");
+		pw.println("Balance: $" + newBalance + "<br>\n");
 		pw.close();
 		return 0;
 	}
@@ -97,7 +98,7 @@ public class Transactions {
 		PrintWriter pw = null;
 		String fileName = account.getAccountNumber() + ".txt";
 		try {			
-			pw = new PrintWriter(new FileWriter(fileName), true);
+			pw = new PrintWriter(new BufferedWriter(new FileWriter(fileName)), true);
 		} catch (IOException e) {
 			System.out.println("Error: Printing File Not Found");
 		}
@@ -113,9 +114,9 @@ public class Transactions {
 		transactionBalance.add(newBalance);
 		transactionAmount.add(amount);
 		
-		pw.append("Date: " + df.format(dateobj) + "<br><br>");
-		pw.append("Donate: $" + amount + "<br><br>");
-		pw.append("Balance: $" + newBalance + "<br>\n");
+		pw.println("Date: " + df.format(dateobj) + "<br>");
+		pw.println("Donate: $" + amount + "<br>");
+		pw.println("Balance: $" + newBalance + "<br>\n");
 		pw.close();
 		return 0;
 	}
