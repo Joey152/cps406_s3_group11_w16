@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -35,7 +36,7 @@ public class Transactions {
 		PrintWriter pw = null;
 		String fileName = account.getAccountNumber() + ".txt";
 		try {			
-			pw = new PrintWriter(new FileOutputStream(new File(fileName)), true);
+			pw = new PrintWriter(new FileWriter(fileName), true);
 		} catch (IOException e) {
 			System.out.println("Error: Printing File Not Found");
 		}
@@ -66,7 +67,7 @@ public class Transactions {
 		PrintWriter pw = null;
 		String fileName = account.getAccountNumber() + ".txt";
 		try {			
-			pw = new PrintWriter(new FileOutputStream(new File(fileName)), true);
+			pw = new PrintWriter(new FileWriter(fileName), true);
 		} catch (IOException e) {
 			System.out.println("Error: Printing File Not Found");
 		}
@@ -96,7 +97,7 @@ public class Transactions {
 		PrintWriter pw = null;
 		String fileName = account.getAccountNumber() + ".txt";
 		try {			
-			pw = new PrintWriter(new FileOutputStream(new File(fileName)), true);
+			pw = new PrintWriter(new FileWriter(fileName), true);
 		} catch (IOException e) {
 			System.out.println("Error: Printing File Not Found");
 		}

@@ -60,7 +60,7 @@ public class Printer {
 		Scanner sc = new Scanner(account.getAccountNumber() + ".txt");
 		String history = "<html>";
 		while(sc.hasNextLine()) {
-			history = history + sc.nextLine() + "<br>";
+			history = history + sc.nextLine();
 		}
 		history += "</html>";
 		sc.close();
