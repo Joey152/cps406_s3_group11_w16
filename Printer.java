@@ -58,8 +58,11 @@ public class Printer {
 	
 	public String printTransactionHistory() {
 		Scanner sc = new Scanner(account.getAccountNumber() + ".txt");
-		String history = "";
-		history = history + sc.nextLine() + " ";
+		String history = "<html>";
+		while(sc.hasNextLine()) {
+			history = history + sc.nextLine() + "<br>";
+		}
+		history += "</html>";
 		sc.close();
 		return history;
 	}
