@@ -43,6 +43,8 @@ public class Panel extends JFrame implements ActionListener{
 	public JLabel newPinLabel2;
 	public JLabel withdrawLabel;
 	public JLabel depositLabel;
+	private JLabel historyLabel;
+	private JLabel info;
 	public JButton cardButton;
 	public JButton depositButton;
 	public JButton withdrawButton;
@@ -98,6 +100,8 @@ public class Panel extends JFrame implements ActionListener{
 		newPinLabel2 = new JLabel("Verify new pin:");
 		withdrawLabel = new JLabel("Enter amount to withdraw:");
 		depositLabel = new JLabel("Enter amount to deposit:");
+		info = new JLabel();
+		historyLabel = new JLabel();
 		pinField = new JPasswordField(4);
 		newPinField = new JPasswordField(4);
 		newPinField2 = new JPasswordField(4);
@@ -256,10 +260,6 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridwidth = 2;
 		infoPanel.add(title, gbc);
 		
-		JLabel info = new JLabel();
-		String str = new String("<html>Name: " + bAccount.getName() +
-				"<br>Balance: " + bAccount.getAccountBalance() + "</html>");
-		info.setText(str);
 		info.setFont(new Font("calibri", Font.BOLD, 30));
 		gbc.anchor = GridBagConstraints.CENTER; 
 		gbc.gridx = 0;
@@ -283,13 +283,10 @@ public class Panel extends JFrame implements ActionListener{
 	public void showHistory() {
 		historyPanel.setLayout(new GridBagLayout());
 		
-		Printer p = new Printer(transaction);
-		String str = p.printTransactionHistory();
-		JLabel history = new JLabel(str);
 		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		historyPanel.add(history, gbc);
+		historyPanel.add(historyLabel, gbc);
 		
 		backToInfo.addActionListener(this);
 		gbc.anchor = GridBagConstraints.CENTER;
@@ -458,6 +455,9 @@ public class Panel extends JFrame implements ActionListener{
 			mainLayout.show(mainPanel, "3");
 		}
 		else if(event.getSource() == infoButton || event.getSource() == backToInfo){
+			String str = new String("<html>Name: " + bAccount.getName() +
+					"<br>Balance: " + bAccount.getAccountBalance() + "</html>");
+			info.setText(str);
 			mainLayout.show(mainPanel , "5");
 		}
 		else if(event.getSource() == emergencyButton) {
@@ -473,6 +473,9 @@ public class Panel extends JFrame implements ActionListener{
 			// stuff
 		}
 		else if(event.getSource() == historyButton) {
+			Printer p = new Printer(transaction);
+			String str = p.printTransactionHistory();
+			historyLabel.setText(str);
 			mainLayout.show(mainPanel, "6");
 		}
 		else if(event.getSource() == backToMenu) {
