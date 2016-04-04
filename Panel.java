@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -167,8 +168,8 @@ public class Panel extends JFrame implements ActionListener{
 		this.depositMenu();
 		//this too-----------------------------------------------------------------------------------------------------------------------------------------------------
 		this.donatePanel();
-		this.printingPanel();
-		this.printingPanel2();
+		//this.printingPanel();
+		//this.printingPanel2();
 		//this too--------------------------------------------------------------------------------------------------------------------------------------------------
 
 		add(mainPanel);
@@ -338,6 +339,12 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		printingPanel.add(printingLabel , gbc);
+		Printer printer = new Printer(transaction);
+		try {
+			printer.printReceipt();
+		} catch (IOException e) {
+			System.out.println("Cannot write receipt to file!");
+		}
 		
 		//this is supposed to pause for 2 seconds then exit
 		//pause(2000);		
@@ -352,7 +359,12 @@ public class Panel extends JFrame implements ActionListener{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		printingPanel2.add(printingLabel2 , gbc);
-		
+		Printer printer = new Printer(transaction);
+		try {
+			printer.printReceipt();
+		} catch (IOException e) {
+			System.out.println("Cannot write receipt to file!");
+		}
 		//this is supposed to pause for 2 seconds then exit
 		//pause(2000);		
 		//setVisible(false); 
@@ -495,7 +507,9 @@ public class Panel extends JFrame implements ActionListener{
 					bAccount = new BankAccount(card, "Ted");
 					transaction = new Transactions(bAccount);
 				} //yes it writes it to itself, I'm being lazy
-				this.infoPanel();				
+				this.infoPanel();
+				this.printingPanel();
+				this.printingPanel2();
 				mainLayout.show(mainPanel , "2");
 			}			
 		}

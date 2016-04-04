@@ -33,7 +33,7 @@ public class Printer {
 		pw.println("Receipt");
 		pw.println("Name:\t" + name);
 		pw.println("Card Number:\t" + account.getAccountNumber());
-		pw.println("Date:\t" + date.get(0));
+		//pw.println("Date:\t" + date.get(0)); //broken until dates properly handled
 		pw.println();
 		for(int i = 0; i < type.size(); i++) {
 			String t = "";
