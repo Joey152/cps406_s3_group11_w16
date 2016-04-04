@@ -1,4 +1,5 @@
-import java.io.FileWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -13,22 +14,13 @@ public class Transactions {
 	private ArrayList<String> transactionDates;
 	private ArrayList<Integer> transactionBalance;
 	private ArrayList<Integer> transactionAmount;
-	private PrintWriter pw;
 	
 	public Transactions(BankAccount account){
-		String fileName;
-		
 		this.account = account;
 		transactionType = new ArrayList<>();
 		transactionDates = new ArrayList<>();
 		transactionBalance = new ArrayList<>();
 		transactionAmount = new ArrayList<>();
-		fileName = account.getAccountNumber() + ".txt";
-		try {
-			pw = new PrintWriter(new FileWriter(fileName));
-		} catch (IOException e) {
-			System.out.println("Error: Printing File Not Found");
-		}
 	}
 	
 	/**
@@ -40,6 +32,13 @@ public class Transactions {
 	 * @throws IOException 
 	 */
 	public int withdraw(int amount) {
+		PrintWriter pw = null;
+		String fileName = account.getAccountNumber() + ".txt";
+		try {			
+			pw = new PrintWriter(new FileOutputStream(new File(fileName)), true);
+		} catch (IOException e) {
+			System.out.println("Error: Printing File Not Found");
+		}
 		int newBalance = account.getAccountBalance() - amount;
 		if(newBalance < 0) {
 			return 1;
@@ -56,14 +55,21 @@ public class Transactions {
 		transactionBalance.add(newBalance);
 		transactionAmount.add(amount);
 		
-		pw.println("Date: " + df.format(dateobj));
-		pw.println("Withdraw: $" + amount);
-		pw.println("Balance: $" + newBalance);
-		pw.println();
+		pw.append("Date: " + df.format(dateobj) + "<br>");
+		pw.append("Withdraw: $" + amount + "<br>");
+		pw.append("Balance: $" + newBalance + "<br>\n");
+		pw.close();
 		return 0;
 	}
 	
 	public int deposit(int amount) {
+		PrintWriter pw = null;
+		String fileName = account.getAccountNumber() + ".txt";
+		try {			
+			pw = new PrintWriter(new FileOutputStream(new File(fileName)), true);
+		} catch (IOException e) {
+			System.out.println("Error: Printing File Not Found");
+		}
 		int newBalance = account.getAccountBalance() + amount;
 		account.setAccountBalance(newBalance);
 		transactionType.add(1);
@@ -73,10 +79,10 @@ public class Transactions {
 		transactionBalance.add(newBalance);
 		transactionAmount.add(amount);
 		
-		pw.println("Date: " + df.format(dateobj));
-		pw.println("Deposit: $" + amount);
-		pw.println("Balance: $" + newBalance);
-		pw.println();
+		pw.append("Date: " + df.format(dateobj) + "<br><br>");
+		pw.append("Deposit: $" + amount + "<br><br>");
+		pw.append("Balance: $" + newBalance + "<br>\n");
+		pw.close();
 		return 0;
 	}
 	
@@ -87,6 +93,13 @@ public class Transactions {
 	 * @return 1 is not enough money in account 
 	 */
 	public int donate(int amount) {
+		PrintWriter pw = null;
+		String fileName = account.getAccountNumber() + ".txt";
+		try {			
+			pw = new PrintWriter(new FileOutputStream(new File(fileName)), true);
+		} catch (IOException e) {
+			System.out.println("Error: Printing File Not Found");
+		}
 		int newBalance = account.getAccountBalance() - 1;
 		if(newBalance < 0) {
 			return 1;
@@ -99,10 +112,10 @@ public class Transactions {
 		transactionBalance.add(newBalance);
 		transactionAmount.add(amount);
 		
-		pw.println("Date: " + df.format(dateobj));
-		pw.println("Donate: $" + amount);
-		pw.println("Balance: $" + newBalance);
-		pw.println();
+		pw.append("Date: " + df.format(dateobj) + "<br><br>");
+		pw.append("Donate: $" + amount + "<br><br>");
+		pw.append("Balance: $" + newBalance + "<br>\n");
+		pw.close();
 		return 0;
 	}
 	
