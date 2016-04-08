@@ -27,7 +27,7 @@ reduce the users balance by 1% as a service charge since it was a low priority r
 Security was good, we didn’t do anything against system cracking but we assume that it is pretty solid and the system 
 can’t be abused to do something like withdraw a million dollars even though you don’t have that in your account. When 
 there was insufficient funds we didn’t display this information to the user, although the user was able to input that 
-information again and money would not be taken out of the account unless the amount enter was in the account. We added an 
+information again and money would not be taken out of the account unless the amount entered was in the account. We added an 
 emergency button that would act as protection if there was a mugger, although it did so displaying a confirmation on the screen.
 
 We weren’t able to meet the records requirement because our database was not working. Our receipts did not say anything nice.
