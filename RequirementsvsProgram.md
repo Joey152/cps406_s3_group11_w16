@@ -15,7 +15,7 @@ We can implement the same ATM program in other ATMs but that’s as far as porta
 System Functional Requirements
 
 The system reads the card information and finds a matching account. It confirms that the pin inputted matches the 
-found account. The system has a max pin tries at 5, although we don’t suspend the card. 
+found account. The system has a max pin tries at 5, although we don’t suspend the card nor does it display a get assistance message. 
 
 In terms of UI, there is a welcome screen with all of the options such as withdraw funds, print receipt, etc. 
 Unfortunately we were unable to add bank promotions on the welcome screen. The withdraw and deposit screens did 
